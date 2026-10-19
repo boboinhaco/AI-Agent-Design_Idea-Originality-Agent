@@ -1,6 +1,23 @@
-# AI Agent 설계_아이디어 독창성 검증 에이전트
+# 아이디어 독창성 검증 에이전트 (Idea Originality Agent)
 
-SKALA 'AI Agent 설계 및 구축' 실습 과제(교재 131p). 작성자: 3반 최인서
+서비스 아이디어를 넣으면 유사 서비스를 국내·해외에서 찾아 **이미 있는 것 / 겹치는 점 / 차별점 / 판정**을 출처와 함께 정리하는 멀티 에이전트입니다. 차별점은 반박 전용 에이전트의 검토를 통과한 것만 남기고, 리포트의 URL은 코드로 실제 검색 결과와 대조해 지어낸 출처를 걸러냅니다.
+
+![LangGraph](https://img.shields.io/badge/LangGraph-deepagents-1C3C3C?logo=langchain&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-gpt--4o--mini-412991?logo=openai&logoColor=white)
+![Gemini](https://img.shields.io/badge/Google-Gemini-4285F4?logo=google&logoColor=white)
+![Tavily](https://img.shields.io/badge/Tavily-Search-0ea5e9)
+![Colab](https://img.shields.io/badge/Google-Colab-F9AB00?logo=googlecolab&logoColor=white)
+
+![아키텍처](architecture.png)
+
+| | |
+|---|---|
+| **형태** | 개인 과제 (SKALA 4기 'AI Agent 설계 및 구축', 2026.10) |
+| **구조** | Supervisor + `research-agent`(유사 서비스 탐색) + `critique-agent`(차별점 반박) · 도구는 `internet_search` 하나 |
+| **핵심 포인트** | ① 주장하는 쪽과 깨는 쪽을 분리해 확증 편향 차단 ② 리포트 URL을 실제 검색 결과와 코드로 대조(지어낸 출처 0개 목표) ③ 정답을 아는 아이디어로 판정을 자동 평가 |
+| **결과** | 성공 기준 6개 중 gpt-4o-mini 6/6, Gemini 5/6 통과 · 1회 실행 26~45초 |
+
+> 아래는 교재 체크리스트(120~131p)에 따라 설계 과정을 순서대로 기록한 문서입니다. SKALA 'AI Agent 설계 및 구축' 실습 과제(교재 131p). 작성자: 3반 최인서
 
 - 코드: [`idea_originality_agent.ipynb`](idea_originality_agent.ipynb) (Google Colab에서 실행, 출력은 지운 상태)
 - 필요한 키: `OPENAI_API_KEY`, `GOOGLE_API_KEY`, `TAVILY_API_KEY` (Colab 보안 비밀 또는 `/content/.env`)
